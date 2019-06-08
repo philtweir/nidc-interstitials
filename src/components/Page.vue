@@ -63,7 +63,6 @@ export default {
     },
     sessions() {
       if (this.agenda) {
-        console.log(this.agenda);
         return this.agenda.sessions.filter(
           session => (session.room == this.roomId)
         ).sort((a, b) => (a.time - b.time));

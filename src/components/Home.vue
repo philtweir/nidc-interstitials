@@ -8,36 +8,36 @@
           <p>Use L/R to find your session, click it, then refresh</p>
           <p>Refreshing again will return you here</p>
         </section>
-    <section v-for="(room, ix) in rooms" v-if="rooms">
-      <h3>{{ room.title }}</h3>
-      <center>
-      <table>
-        <thead>
-          <tr>
-            <th>Time</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(session, ix) in sessions[room.id]">
-            <td>
-              {{ timeslots[session.time].startTime }}
-            </td>
-            <td>
-              <router-link :to="'/r/' + room.id + '/' + session.time">
-              {{ session.title }}
-              </router-link>
-              <span v-for="(speaker, ix) in getSpeakers(session)" class="speaker">
-                <strong>{{ speaker.title }}</strong>
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      </center>
-    </section>
-  </div>
-  </div>
+        <section v-for="(room, ix) in rooms" v-if="rooms">
+          <h3>{{ room.title }}</h3>
+          <center>
+          <table>
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(session, ix) in sessions[room.id]">
+                <td>
+                  {{ timeslots[session.time].startTime }}
+                </td>
+                <td>
+                  <router-link :to="'/r/' + room.id + '/' + session.time">
+                  {{ session.title }}
+                  </router-link>
+                  <span v-for="(speaker, ix) in getSpeakers(session)" class="speaker">
+                    <strong>{{ speaker.title }}</strong>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          </center>
+        </section>
+      </div>
+    </div>
 </template>
 
 <script>
@@ -78,14 +78,12 @@ export default {
         this.agenda.rooms.forEach(room => {
           rooms[room.id] = room;
         });
-      console.log(rooms);
       }
       return rooms;
     },
     sessions() {
       var sessions = {};
       if (this.agenda) {
-        console.log(this.agenda);
         for (var roomId in this.rooms) {
           sessions[roomId] = this.agenda.sessions.filter(
             session => (session.room == roomId)
